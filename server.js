@@ -6,12 +6,14 @@ var server = http.createServer(function (req, res) {   //create web server
         // set response header
         res.writeHead(200, { 'Content-Type': 'text/html' });   
         let content = fs.readFileSync('hello.txt','utf8')    
-        let names = content.split('\n');
-        let list = '<ol>';
-        for(i=0;i<names.length;i++){
-            list += '<li>' + names[i] + '</li>';
+        let lines = content.split('\n');
+        let list = '<ul>';
+        for(i=0;i<lines.length;i++){
+            let id= lines[i].split(';')[0];
+            let name = lines[i].split(';')[1];
+            list += '<li>' + id + '-' + name  + '</li>';
         }  
-        list += '</ol>';
+        list += '</ul>';
         // set response content  
         let a1 = '<br><a href="/student">Student</a>';  
         let a2 = '<br><a href="/admin">Admin</a>';  
